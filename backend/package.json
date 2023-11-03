@@ -4,7 +4,8 @@
   "description": "A Chat app backend",
   "main": "server.ts",
   "scripts": {
-    "start": "ts-node server.ts",
+    "start": "ts-node socket.ts",
+    
     "build": "tsc"
   },
   "author": "",

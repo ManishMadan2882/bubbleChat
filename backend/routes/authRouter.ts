@@ -1,5 +1,4 @@
 import express from 'express'
-import Router from 'express';
 import { getUser, loginUser, registerUser } from '../controllers/auth';
 import authenticateToken from '../middleware/verify';
 
