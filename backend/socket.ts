@@ -9,7 +9,7 @@ type UserList = {
     socketId: string
     userId: string
 } 
-let users: UserList[] = [];
+var users: UserList[]=[];
 const addUsers = (userId: string, socketId: string) => {
     if (!users?.some((user) => user.userId === userId)) {
         users.push({
@@ -22,26 +22,33 @@ const removeUser = ((socketId: string) => {
     users = users?.filter((user) => user.socketId !== socketId)
 })
 const getUser = (userId: string) => {
-    return users?.find((user) => user.userId === userId);
+    console.log('users',users);
+    
+    const userSocketId = users.filter((element) => (element.userId && element.userId !== userId));
+
+    return userSocketId[0]
 };
 io.on('connection', (socket) => {
-    console.log('A user is connected to the server');
+    //console.log('A user is connected to the server');
     //user is added
     socket.on("addUser", (userId) => {
         addUsers(userId, socket.id)
+        //console.log('users',users);
+        
         io.emit('getUsers', users)
     })
     //user disconnects
     socket.on('disconnect', () => {
-        console.log('a user disconnected')
+        //console.log('a user disconnected')
         removeUser(socket.id)
         io.emit('getUsers', users)
     })
       //send and get message
   socket.on("sendMessage", ({ senderId, receiverId, text,createdAt }) => {
     const user:any = getUser(receiverId);
+    console.log(user?.socketId,{senderId,receiverId,text})
     io.to(user?.socketId).emit("getMessage", {
-      senderId,
+      sender:senderId,
       text,
       createdAt
     });

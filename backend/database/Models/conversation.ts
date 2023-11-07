@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 const Conversation = new  mongoose.Schema({
-    members :  {
-        type:[mongoose.Schema.ObjectId],
+    members :  [{
+        type:mongoose.Schema.ObjectId,
         ref:'User'
         
-    },
+    }],
     messages:[
         {
             sender:{
