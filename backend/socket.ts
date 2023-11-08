@@ -24,9 +24,9 @@ const removeUser = ((socketId: string) => {
 const getUser = (userId: string) => {
     console.log('users',users);
     
-    const userSocketId = users.filter((element) => (element.userId && element.userId !== userId));
+    const userSocket = users.find((element) => (element.userId && element.userId === userId));
 
-    return userSocketId[0]
+    return userSocket;
 };
 io.on('connection', (socket) => {
     //console.log('A user is connected to the server');
