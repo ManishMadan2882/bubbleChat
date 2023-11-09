@@ -1,10 +1,10 @@
 import userModel from "../database/Models/userModel";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { hashSync, compareSync, genSaltSync } from "bcrypt";
 import { generateFromEmail, generateUsername } from "unique-username-generator";
 import jwt, { decode, sign } from 'jsonwebtoken'
 //register new users
-async function registerUser(req: Request, res: Response) {
+async function registerUser(req: Request, res: Response,next:NextFunction) {
     const { email, password } = req.body;
     //generates a random username from the email id
     const username = generateFromEmail(
@@ -22,7 +22,7 @@ async function registerUser(req: Request, res: Response) {
         password: encryptedPassword
     })
     newUser.save()
-        .then(() => res.status(200).json({ msg: 'new user created', success: true }))
+        .then(() => next())
         .catch(err => res.status(400).json({ msg: 'something went wrong', err, success: false }))
 }
 //create session for existing users

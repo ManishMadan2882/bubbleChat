@@ -4,7 +4,7 @@ import authenticateToken from '../middleware/verify';
 
 const router= express.Router()
 
-router.post('/register',registerUser) //post with body --> email & password
+router.post('/register',registerUser,loginUser) //post with body --> email & password
 router.post('/login',loginUser)  //post with body --> email & password
 router.get('/user',authenticateToken,getUser) //responds with json only when Status is OK
 
