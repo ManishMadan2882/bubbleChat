@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+  @import url('https://fonts.googleapis.com/css2?family=Prompt&family=Raleway:wght@500&family=Signika&display=swap');
+
+
+  body{
+    background-image: linear-gradient(to right bottom, #9d1c3e, #831246, #661148, #471245, #29113c, #22113b, #1b1139, #141137, #221541, #31194a, #411c52, #511f5a);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment:  fixed;
+    scroll-behavior: smooth;
+  }
+  .black-grad{
+    background-image: url('https://media.istockphoto.com/id/1303053462/photo/abstract-background-with-smooth-waves-in-shades-of-black.jpg?s=612x612&w=0&k=20&c=YxxiBpxWyKWFQisYaGKnmn7M4H7cen1c9WVEO3nqPc8=');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment:  fixed;
+    scroll-behavior: smooth;
+  }
+  
+ /*  aside {
+    transform: translateX(-2.88vmax) translateY(2.35vmax);
+    transition: all 1s ease-in-out;
+    
+  } */
+
+  .hamburger{
+    background: rgba(164, 200, 213, 0.06);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8.2px);
+    -webkit-backdrop-filter: blur(8.2px);
+    border: 1px solid rgba(164, 200, 213, 0.1);
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(90, 90, 90);
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+  }
