@@ -72,8 +72,8 @@ const getConversation = async (req: Request, res: Response) => {
         { members: { $in: [receiverId] } }
       ]
     })
-    /* .populate('members', ['username', 'profilePicture'])
-    .sort({ updatedAt: -1 }) */
+    .populate('members', ['username', 'profilePicture'])
+    
 
     res.status(202).json(conv)
   }

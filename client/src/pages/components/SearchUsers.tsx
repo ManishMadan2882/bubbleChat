@@ -57,8 +57,8 @@ export default function SearchUsers() {
                     </Typography>
                     <TextField value={username} onChange={handleChange} label='Username' />
                     {
-                        list?.map((elem : any)=>{
-                            return (<List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                        list?.map((elem : any,key:number)=>{
+                            return (<List key={key} sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                         <ListItem>
                             <ListItemAvatar>
                                 <Avatar>

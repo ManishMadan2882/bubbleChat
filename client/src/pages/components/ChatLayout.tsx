@@ -14,9 +14,9 @@ const socket: Socket = io("http://localhost:8000/");
 
 const Chat = () => {
     
-    const [msg, setMsg] = useState<string>('')
+    /* const [msg, setMsg] = useState<string>('')
     const [left,setLeft] = useState<number>(10)
-    const [arr, setArr] = useState<string[]>([])
+    const [arr, setArr] = useState<string[]>([]) */
     const [currentUser,setCurrentUser] = useState<string>('')
 
     

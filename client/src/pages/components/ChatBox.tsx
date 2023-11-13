@@ -12,7 +12,6 @@ export const ChatBox = ({ socket,currentUser }) => {
   const [cookies] = useCookies(['session-token'])
   const token = cookies['session-token']
   const [chat, setChat] = useState<any[]>([])
-  const [liveChat, setLiveChat] = useState<any[]>([])
   const [message, setMessage] = useState('')
   const user = useContext(userContext)
   //const [socket, setSocket] = useState<any>(io('http://localhost:8000'));
@@ -100,13 +99,13 @@ export const ChatBox = ({ socket,currentUser }) => {
           
           if (key > 0 && date === moment(chat[key - 1].createdAt).format('LL')) {
 
-            return <MessageBubble sender={element.sender} time={element.createdAt} msg={element.text} />
+            return <MessageBubble key={key} sender={element.sender} time={element.createdAt} msg={element.text} />
           }
           return (
-            <>
+            <div key={key}>
               <h1 className="w-full my-5 block p-2 underline text-center">{date}</h1>
               <MessageBubble sender={element.sender} time={element.createdAt} msg={element.text} />
-            </>
+            </div>
           )
         })}
         

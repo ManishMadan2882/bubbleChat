@@ -17,7 +17,6 @@ const Users = ({ currentUser, setCurrentUser }) => {
     const token = cookies['session-token']
     const [list, setList] = useState<any>()
     const [chats, setChats] = useState<any>()
-    const [isSidebarOpen, setSidebarOpen] = useState<boolean>(false);
     const [isSearching, setIsSearching] = useState<boolean>(false)
     const [searchQuery, setSearchQuery] = useState<string>('')
     const [searchLoad, setSearchLoad] = useState<boolean>(false)
@@ -25,11 +24,15 @@ const Users = ({ currentUser, setCurrentUser }) => {
 
     const activeSearch = () => {
         setIsSearching(true)
+
     }
-    const deactiveSearch = () => {
+    const deactiveSearch = ()=>{ 
         setIsSearching(false);
         setSearchLoad(false);
     }
+    useEffect(()=>{
+        return ()=>setSearchQuery('')
+    },[isSearching])
     useEffect(() => {
         setSearchLoad(true);
         if (searchQuery.length > 0)
@@ -49,10 +52,6 @@ const Users = ({ currentUser, setCurrentUser }) => {
     return (
         <div className={`m-0 `}>
             <aside className={`h-[89vh]  overflow-scroll transition-all backdrop:blur-lg bg-black/20 p-2 rounded-lg`}>
-            <button onClick={()=>setSidebarOpen(!isSidebarOpen)}>
-            <KeyboardArrowRightIcon  fontSize='large' sx={{ color: blueGrey[200] }} />
-            </button>
-                {isSidebarOpen &&
                 <div>
                     <label>
                         <Search sx={{ color: blueGrey[200] }} />
@@ -67,7 +66,7 @@ const Users = ({ currentUser, setCurrentUser }) => {
                         className='mx-2 rounded-full border-2 sm:w-auto pl-4 pr-8 py-2 w-48 border-blue-500 text-blue-500'
                     />
                     
-                </div>}
+                </div>
                 {(searchLoad || list?.length === 0) ?
                     <div className='flex justify-center'>
 
@@ -80,7 +79,7 @@ const Users = ({ currentUser, setCurrentUser }) => {
                     : (
                         isSearching ? list?.map((element: any, key: number) => {
                             return (
-                                <div onClick={() => setCurrentUser(element._id)} className={"p-2 mt-2 text-white rounded-md blur-none  flex justify-start h-100 bg-gradient-to-r from-slate-800 to-gray-900"}>
+                                <div key={key} onClick={() => setCurrentUser(element._id)} className={"p-2 mt-2 text-white rounded-md blur-none  flex justify-start h-100 bg-gradient-to-r from-slate-800 to-gray-900"}>
                                     <Image className="inline rounded-full" src={element.profilePicture} width={50} height={50} alt="image" />
                                     <div className="md:grid ml-3 grid-cols-1">
                                         <span className="">
@@ -98,10 +97,11 @@ const Users = ({ currentUser, setCurrentUser }) => {
                                 const latestMsg = elem.messages[0].text
                                 return (
                                     <div
+                                        key={key}
                                         onClick={() => setCurrentUser(member[0]._id)}
-                                        className={`p-2  mt-2 text-white rounded-md blur-none  flex justify-start h-100 bg-gray-800 hover:bg-slate-700 border border-black ${(member[0]._id == currentUser) ? 'bg-slate-900 border-white' : 'bg-gray-800'}`}>
+                                        className={`p-2 cursor-pointer mt-2 text-white rounded-md blur-none  flex justify-start h-100 bg-gray-800 hover:bg-slate-700 border border-black ${(member[0]._id == currentUser) ? 'bg-slate-900 border-white' : 'bg-gray-800'}`}>
                                         <Image className="inline rounded-full" src={member[0].profilePicture} width={50} height={50} alt="image" />
-                                        <div className={` ml-3  ${!isSidebarOpen ? 'hidden' : 'grid grid-cols-1'} `}>
+                                        <div className={` ml-3   grid grid-cols-1 `}>
                                             <span className="">
                                                 {member[0].username}
                                             </span>
