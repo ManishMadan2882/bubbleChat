@@ -4,19 +4,18 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import Search from '@mui/icons-material/Search'
 import { searchUsers, loadConversations } from '../api/loadUsers'
 import { blueGrey } from '@mui/material/colors'
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { useCookies } from 'react-cookie'
 import authContext from '@/context/userContext'
 import { useContext } from 'react'
-import Sidebar from './Sidebar'
-import { IsoSharp } from '@mui/icons-material'
+import ChatContext from '@/context/chatContext'
 //@ts-ignore
 const Users = ({ currentUser, setCurrentUser }) => {
     const [cookies, setCookie, removeCookie] = useCookies(['session-token'])
     const auth = useContext(authContext)
     const token = cookies['session-token']
-    const [list, setList] = useState<any>()
-    const [chats, setChats] = useState<any>()
+    const [list, setList] = useState<any>() 
+    const [chats, setChats] = useContext<Conversations[]>(ChatContext)
+    console.log(chats)
     const [isSearching, setIsSearching] = useState<boolean>(false)
     const [searchQuery, setSearchQuery] = useState<string>('')
     const [searchLoad, setSearchLoad] = useState<boolean>(false)
@@ -42,12 +41,12 @@ const Users = ({ currentUser, setCurrentUser }) => {
             })
         else deactiveSearch();
     }, [searchQuery])
-    useEffect(() => {
+/*     useEffect(() => {
         loadConversations(token).then((data) => {
             setChats(data)
             setSearchLoad(false)
         })
-    }, [])
+    }, []) */
 
     return (
         <div className={`m-0 `}>

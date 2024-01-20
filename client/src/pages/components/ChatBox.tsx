@@ -7,11 +7,20 @@ import { useCookies } from "react-cookie"
 import { useState, useEffect, ChangeEvent, useRef, useContext } from "react"
 import { getConversationById } from "../api/conversation"
 import userContext from "@/context/userContext"
+import ChatContext from "@/context/chatContext"
+interface Message {
+  createdAt: number,
+  sender: string | undefined,
+  receiverId:string | undefined,
+  text: string | undefined
+}
 //@ts-ignore
 export const ChatBox = ({ socket,currentUser }) => {
   const [cookies] = useCookies(['session-token'])
   const token = cookies['session-token']
-  const [chat, setChat] = useState<any[]>([])
+  const [chats, setChats] = useContext<Conversations[]>(ChatContext)
+  const [chat,setChat] = useState<Message[]>();
+  
   const [message, setMessage] = useState('')
   const user = useContext(userContext)
   //const [socket, setSocket] = useState<any>(io('http://localhost:8000'));
